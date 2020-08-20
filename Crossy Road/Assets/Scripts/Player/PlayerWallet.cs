@@ -5,6 +5,7 @@ using UnityEngine.Events;
 [DisallowMultipleComponent]
 public class PlayerWallet : MonoBehaviour, ISaveable
 {
+    [SerializeField] private AudioSource getCoinSound;
     public event Action<int> onAddingCoins;
     public Action onAddCoins;
     public int CoinCount { get; private set; }
@@ -18,6 +19,7 @@ public class PlayerWallet : MonoBehaviour, ISaveable
     }
     public void AddCoin(int count)
     {
+        getCoinSound.PlayOneShot(getCoinSound.clip);
         onAddingCoins?.Invoke(count);
         onAddCoins?.Invoke();
     }

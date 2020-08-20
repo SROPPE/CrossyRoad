@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using DG.Tweening;
-public class Vehicle : MonoBehaviour
+public class Vehicle : MonoBehaviour,IMoveable
 {
     private void CompleteMovement()
     {
         gameObject.SetActive(false);
     }
-    public void StartMoveAction(Vector3 endPoint, float currentGivenSpeed)
+
+    public void StartMoveAction(Vector3 endPoint, float moveDuration)
     {
-      
-        transform.DOMove(endPoint, currentGivenSpeed).OnComplete(CompleteMovement);
+        transform.LookAt(endPoint);
+        transform.DOMove(endPoint, moveDuration).OnComplete(CompleteMovement);
     }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17999009265231400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 1, z: 0}
+  m_LocalPosition: {x: -10, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2104776678531125280}
@@ -187,11 +187,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehiclePrefab: {fileID: 1082274707913250313, guid: 598534495a9fb264ba4face55ce627ac,
     type: 3}
-  minVehicleSpeed: 20
+  minVehicleSpeed: 10
   maxVehicleSpeed: 30
   spawnPoint: {fileID: 443317299372384180}
   endPoint: {fileID: 2117183895188261878}
-  spawnRate: 3
+  spawnRate: 5
 --- !u!1 &3967908813306345699
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3967908813306345699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 1, z: 0}
+  m_LocalPosition: {x: 10, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2104776678531125280}

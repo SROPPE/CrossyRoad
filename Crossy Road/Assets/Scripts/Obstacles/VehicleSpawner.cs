@@ -13,7 +13,7 @@ public class VehicleSpawner : MonoBehaviour, IPolledObject
     [SerializeField] private Transform endPoint;
     [SerializeField] private float spawnRate = 3f;
 
-    private float timeScinceLastSpawn = 0f;
+    private float timeScinceLastSpawn = Mathf.Infinity;
     private float currentGivenSpeed;
     private bool canSpawn = false;
     private ObjectPool objectPool;
@@ -64,8 +64,8 @@ public class VehicleSpawner : MonoBehaviour, IPolledObject
 
         timeScinceLastSpawn = 0f;
         var vehicleInstance = objectPool.OnSpawnObject(vehiclePrefab.name, spawnPoint.position, Quaternion.identity, transform);
-        vehicleInstance.transform.LookAt(endPoint);
-        vehicleInstance.GetComponent<Vehicle>().StartMoveAction(endPoint.position, currentGivenSpeed);
+
+        vehicleInstance.GetComponent<IMoveable>().StartMoveAction(endPoint.position, currentGivenSpeed);
     }
 
     public void OnSpawn()

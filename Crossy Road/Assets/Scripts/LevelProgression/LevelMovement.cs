@@ -2,7 +2,7 @@
 using DG.Tweening;
 
 
-public class LevelMovement : MonoBehaviour
+public class LevelMovement : MonoBehaviour,ISaveable
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float offset = 0.1f;
@@ -11,8 +11,11 @@ public class LevelMovement : MonoBehaviour
     private bool isUrgentUpdate = false;
     private PlayerController playerController;
     private PlayerMovement playerMovement;
+
+    private Vector3 startPosition;
     private void Awake()
     {
+        startPosition = transform.position;
         playerController = FindObjectOfType<PlayerController>();
         playerMovement = playerController.GetComponent<PlayerMovement>();
     }
@@ -44,5 +47,15 @@ public class LevelMovement : MonoBehaviour
         transform.position = new Vector3(playerMovement.transform.position.x,transform.position.y,transform.position.z);
         transform.position = Vector3.Lerp
             (transform.position, transform.position + Vector3.forward, movementSpeed*Time.deltaTime);
+    }
+
+    public object CaptureState()
+    {
+        return new SerializableVector3(startPosition);
+    }
+
+    public void RestoreState(object state)
+    {
+        transform.position = ((SerializableVector3)state).ToVector();
     }
 }

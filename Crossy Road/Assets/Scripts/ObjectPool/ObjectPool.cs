@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +16,7 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private List<Pool> pools;
     Dictionary<string, Queue<GameObject>> objectPool;
-
+    public event Action onRestored;
     public static ObjectPool Instance;
     private void Awake()
     {
@@ -86,5 +88,16 @@ public class ObjectPool : MonoBehaviour
         }
         Debug.LogWarning("No free objects in the pool.");
         return null;
+    }
+
+    public void RestoreState()
+    {
+        foreach (var pool in objectPool.Values)
+        {
+            foreach (var item in pool)
+            {
+                item.SetActive(false);
+            }
+        }
     }
 }

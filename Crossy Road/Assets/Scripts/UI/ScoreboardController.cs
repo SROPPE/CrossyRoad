@@ -6,16 +6,17 @@ using UnityEngine.UI;
 public class ScoreboardController : MonoBehaviour, ISaveable
 {
     [SerializeField] private Text scoreShower;
+    [SerializeField] private Text scoreRecoredShower;
     private PlayerMovement player;
-    private int score = 0;
-    private float playerMaxPosition = 0f;
+    private int currentScore = 0;
+    private int recordScore = 0;
     private void Awake()
     {
         player = FindObjectOfType<PlayerMovement>();
     }
     private void Start()
     {
-        AddScore();
+        AddScore();  
     }
     private void OnEnable()
     {
@@ -27,17 +28,29 @@ public class ScoreboardController : MonoBehaviour, ISaveable
     }
     private void AddScore()
     {
-        score++;
-        scoreShower.text = score.ToString();
+        currentScore++;
+        if(currentScore >= recordScore)
+        {
+            recordScore = currentScore;
+        }
+        UpdateUI();
     }
 
     public object CaptureState()
     {
-        return score;
+        return recordScore;
     }
 
     public void RestoreState(object state)
     {
-        score = (int)state;
+        currentScore = 0;
+        recordScore = (int)state;
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        scoreRecoredShower.text = string.Format("Рекорд: {0}", recordScore);
+        scoreShower.text = currentScore.ToString();
     }
 }

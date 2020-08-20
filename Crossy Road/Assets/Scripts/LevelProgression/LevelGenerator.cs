@@ -16,7 +16,7 @@ public class LevelGenerator : MonoBehaviour
     private SpawningChunk currentSpawningChunk;
     private ObjectPool objectPool;
     private int spawnedChunks;
-
+    private Vector3 defaultSpawningPosition;
     bool isInitialSpawning = true;
     bool isStartSpotSpawning = true;
     private void Awake()
@@ -25,11 +25,12 @@ public class LevelGenerator : MonoBehaviour
         currentField = new List<GameObject>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         spawnedChunks = spawnBorderEveryChuncks;
+        defaultSpawningPosition = currentSpawningPosition;
     }
     private void Start()
     {
         objectPool = ObjectPool.Instance;
-        InitialFieldCreation();
+        StartNewLevelGeneration();
     }
     private void OnEnable()
     {
@@ -58,7 +59,7 @@ public class LevelGenerator : MonoBehaviour
     private void SpawnChunk(ChunkData chunk)
     {
 
-        var instance = objectPool.OnSpawnObject(chunk.GetChunkPrefab().name, currentSpawningPosition, Quaternion.identity, null);
+        var instance = objectPool.OnSpawnObject(chunk.GetChunkPrefab().name, currentSpawningPosition, Quaternion.identity, transform);
 
         currentField.Add(instance);
         currentSpawningPosition.z++;
@@ -93,5 +94,15 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    public void StartNewLevelGeneration()
+    {
+        currentField.Clear();
+        isInitialSpawning = true;
+        isStartSpotSpawning = true;
+        spawnedChunks = spawnBorderEveryChuncks;
+        currentSpawningChunk.Reset();
+        currentSpawningPosition = defaultSpawningPosition;
+        InitialFieldCreation();
+    }
 
 }
