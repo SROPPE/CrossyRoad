@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7727942272827184059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7727942272827184053}
+  - component: {fileID: 7727942272827184058}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7727942272827184053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727942272827184059}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7727942272827184058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727942272827184059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce27cd66b207bd4584c52bdf92882ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - prefab: {fileID: 5576173769468749824, guid: 7b7fd28d41af15a498868a499e8028fc,
+      type: 3}
+    tag: Grass
+    size: 30
+    expandable: 0
+  - prefab: {fileID: 2104776678531125281, guid: bd033dcab781cfb4d8d3da4c1aed8818,
+      type: 3}
+    tag: Road
+    size: 30
+    expandable: 0
+  - prefab: {fileID: 3813653578478547284, guid: 6899022a4c4f4bc43866a2ab582e98fb,
+      type: 3}
+    tag: Water
+    size: 30
+    expandable: 0
+  - prefab: {fileID: 1082274707913250313, guid: 598534495a9fb264ba4face55ce627ac,
+      type: 3}
+    tag: Car
+    size: 30
+    expandable: 1
+  - prefab: {fileID: 6763877263413177354, guid: 8fa03d0e1b3bde24f980b52d9cc39e90,
+      type: 3}
+    tag: Log
+    size: 30
+    expandable: 1
+  - prefab: {fileID: 137522403842073773, guid: a54b309469fb28141b0bc44b96ec792d, type: 3}
+    tag: Tree
+    size: 30
+    expandable: 1
+  - prefab: {fileID: 2520306568767978959, guid: c9d632f54a151904abd9282ee656aa8d,
+      type: 3}
+    tag: Tree2
+    size: 30
+    expandable: 1
+  - prefab: {fileID: 4874433284423870384, guid: 6b6e314a9cf136349bfa02805f9559d2,
+      type: 3}
+    tag: Borders
+    size: 2
+    expandable: 1
+  - prefab: {fileID: 1760017116257431201, guid: eef6f909558f41e49aa95ac0df96d69a,
+      type: 3}
+    tag: Coin
+    size: 15
+    expandable: 1
