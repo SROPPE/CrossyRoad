@@ -1,61 +1,66 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using CrossyRoad.Saving;
+using CrossyRoad.Core;
 
-
-public class LevelMovement : MonoBehaviour,ISaveable
+namespace CrossyRoad.LevelProgression
 {
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float offset = 0.1f;
-    [SerializeField] private CameraSpotter cameraSpotter;
+    public class LevelMovement : MonoBehaviour, ISaveable
+    {
+        [SerializeField] private float movementSpeed;       
+        [SerializeField] private float chaseTime = 0.2f;        //Time of urgent position update
 
-    private bool isUrgentUpdate = false;
-    private PlayerController playerController;
-    private PlayerMovement playerMovement;
+        [SerializeField] private CameraSpotter cameraSpotter;   //Notifies about the need to update the position
 
-    private Vector3 startPosition;
-    private void Awake()
-    {
-        startPosition = transform.position;
-        playerController = FindObjectOfType<PlayerController>();
-        playerMovement = playerController.GetComponent<PlayerMovement>();
-    }
+        private bool isUrgentUpdate = false;
+        private PlayerController playerController;              
+        private PlayerMovement playerMovement;  
 
-    private void OnEnable()
-    {
-  
-        cameraSpotter.onSpotterTrigger += UrgentUpdateZPosition;
-    }
-    private void OnDisable()
-    {
+        private Vector3 startPosition;
+        private void Awake()
+        {
+            startPosition = transform.position;
+            playerController = FindObjectOfType<PlayerController>();
+            playerMovement = playerController.GetComponent<PlayerMovement>();
+        }
 
-        cameraSpotter.onSpotterTrigger -= UrgentUpdateZPosition;
-    }
-    public void UrgentUpdateZPosition(Vector3 position)
-    {
-        isUrgentUpdate = true;
-        transform.DOMoveZ(position.z, 0.2f).OnComplete(()=>isUrgentUpdate = false);
-    }
-    public void UrgentUpdateXPosition(Vector3 position)
-    {
-        isUrgentUpdate = true;
-        transform.DOMoveX(position.x, 0.2f).OnComplete(() => isUrgentUpdate = false);
-    }
-    private void LateUpdate()
-    {
-        if (playerController.IsDead) return;
-        if (isUrgentUpdate) return;
-        transform.position = new Vector3(playerMovement.transform.position.x,transform.position.y,transform.position.z);
-        transform.position = Vector3.Lerp
-            (transform.position, transform.position + Vector3.forward, movementSpeed*Time.deltaTime);
-    }
+        private void OnEnable()
+        {
+            cameraSpotter.onSpotterTrigger += UrgentUpdateZPosition;
+        }
+        private void OnDisable()
+        {
+            cameraSpotter.onSpotterTrigger -= UrgentUpdateZPosition;
+        }
+        public void UrgentUpdateZPosition(Vector3 position)
+        {
+            isUrgentUpdate = true;
+            transform
+                .DOMoveZ(position.z, chaseTime)
+                .OnComplete(() => isUrgentUpdate = false);
+        }
+        private void LateUpdate()
+        {
+            if (playerController.IsDead) return;
+            if (isUrgentUpdate) return;
+            UpdatePosition();
+        }
 
-    public object CaptureState()
-    {
-        return new SerializableVector3(startPosition);
-    }
+        private void UpdatePosition()
+        {
+            transform.position = new Vector3(playerMovement.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.Lerp
+                (transform.position, transform.position + Vector3.forward, movementSpeed * Time.deltaTime);
+        }
 
-    public void RestoreState(object state)
-    {
-        transform.position = ((SerializableVector3)state).ToVector();
+        public object CaptureState()
+        {
+            return new SerializableVector3(startPosition);
+        }
+
+        public void RestoreState(object state)
+        {
+            transform.position = ((SerializableVector3)state).ToVector();
+        }
     }
 }

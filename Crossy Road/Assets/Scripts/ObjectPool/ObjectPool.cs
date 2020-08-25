@@ -1,6 +1,4 @@
-﻿using DG.Tweening;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +10,16 @@ public class Pool
     public int size;
     public bool expandable;
 }
-public class ObjectPool : MonoBehaviour
+public class ObjectPool : MonoBehaviour     
 {
-    [SerializeField] private List<Pool> pools;
-    Dictionary<string, Queue<GameObject>> objectPool;
     public event Action onRestored;
     public static ObjectPool Instance;
+    [SerializeField] private List<Pool> pools;
+
+    public bool canSpawn = true;
+
+    private Dictionary<string, Queue<GameObject>> objectPool;
+
     private void Awake()
     {
         Instance = this;
@@ -44,14 +46,15 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject OnSpawnObject(string tag, Vector3 position, Quaternion rotation, Transform parent)
     {
+        if (!canSpawn) return null;
         if (!objectPool.ContainsKey(tag))
         {
             Debug.LogWarning($"Does't contain a key \"{tag}\".");
             return null;
         }
         var spawningObject = objectPool[tag].Dequeue();
-        
-        if(spawningObject.activeSelf)
+
+        if (spawningObject.activeSelf)
         {
             spawningObject = TryToExtend(tag);
             if (spawningObject == null) return null;
@@ -92,6 +95,7 @@ public class ObjectPool : MonoBehaviour
 
     public void RestoreState()
     {
+        canSpawn = false;
         foreach (var pool in objectPool.Values)
         {
             foreach (var item in pool)
@@ -99,5 +103,6 @@ public class ObjectPool : MonoBehaviour
                 item.SetActive(false);
             }
         }
+        canSpawn = true;
     }
 }

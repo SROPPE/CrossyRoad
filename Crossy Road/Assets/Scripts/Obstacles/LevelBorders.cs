@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LevelBorders : MonoBehaviour
+namespace CrossyRoad.Obstacles
 {
-    [SerializeField] private Transform border;
-    public static Vector3 rightBorderPosition;
-    private void Awake()
+    public class LevelBorders : MonoBehaviour
     {
-        rightBorderPosition = border.position;
+        [SerializeField] private Transform rightBorder;     
+        public static Vector3 rightBorderPosition;
+        private void Awake()
+        {
+            rightBorderPosition = rightBorder.position;
+        }
     }
 }

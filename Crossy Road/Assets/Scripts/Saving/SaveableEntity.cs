@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-
+namespace CrossyRoad.Saving
+{
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour
     {
@@ -77,3 +78,4 @@ using UnityEngine;
             return false;
         }
     }
+}

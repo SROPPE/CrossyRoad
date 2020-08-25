@@ -1,44 +1,45 @@
-﻿using System;
+﻿using CrossyRoad.UI;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class SavingWrapper : MonoBehaviour
+namespace CrossyRoad.Saving
 {
-    [SerializeField] float loadScreenOutTime = 1f;
-    const string defaultSaveFile = "save";
-    private void Awake()
+    public class SavingWrapper : MonoBehaviour
     {
-        StartCoroutine(LoadLastScene());
-       
-    }
-    private IEnumerator LoadLastScene()
-    {
-        yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
-        var screen = FindObjectOfType<LoadScreen>();
-        screen.LoadScreenImmediate();
-        yield return screen.LoadScreenOut(loadScreenOutTime);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
+        [SerializeField] float loadScreenOutTime = 1f;
+        const string defaultSaveFile = "save";
+        private void Awake()
         {
-            Load();
+            StartCoroutine(LoadLastScene());
+
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        private IEnumerator LoadLastScene()
         {
-            Save();
+            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
+            var screen = FindObjectOfType<LoadScreen>();
+            screen.LoadScreenImmediate();
+            yield return screen.LoadScreenOut(loadScreenOutTime);
         }
-    }
 
-    public void Save()
-    {
-        GetComponent<SavingSystem>().Save(defaultSaveFile);
-    }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Load();
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                Save();
+            }
+        }
 
-    public void Load()
-    {
-        GetComponent<SavingSystem>().Load(defaultSaveFile);
+        public void Save()
+        {
+            GetComponent<SavingSystem>().Save(defaultSaveFile);
+        }
+
+        public void Load()
+        {
+            GetComponent<SavingSystem>().Load(defaultSaveFile);
+        }
     }
 }

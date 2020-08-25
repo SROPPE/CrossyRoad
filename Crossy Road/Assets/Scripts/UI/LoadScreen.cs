@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+namespace CrossyRoad.UI
+{
     public class LoadScreen : MonoBehaviour
     {
-
         CanvasGroup canvasGroup;
         Coroutine currentRoutine;
         private void Awake()
@@ -42,3 +43,4 @@ using UnityEngine;
         }
     }
 
+}

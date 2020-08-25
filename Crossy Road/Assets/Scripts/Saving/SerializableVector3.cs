@@ -1,4 +1,6 @@
 using UnityEngine;
+namespace CrossyRoad.Saving
+{
     [System.Serializable]
     public class SerializableVector3
     {
@@ -16,3 +18,4 @@ using UnityEngine;
             return new Vector3(x, y, z);
         }
     }
+}

@@ -1,24 +1,27 @@
 ﻿using Cinemachine;
+using CrossyRoad.Core;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
-
-public class CameraSpotter : MonoBehaviour
+namespace CrossyRoad.LevelProgression
 {
-    
-    [SerializeField] private CinemachineVirtualCamera camera;
-    private PlayerMovement player;
-    public event Action<Vector3> onSpotterTrigger;
-    private void Awake()
+    public class CameraSpotter : MonoBehaviour
     {
-        player = FindObjectOfType<PlayerMovement>();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            onSpotterTrigger?.Invoke(player.transform.position); 
-        }
-    }
+        [SerializeField] private CinemachineVirtualCamera camera;
+        public event Action<Vector3> onSpotterTrigger;
 
+        private PlayerMovement player;
+
+        private void Awake()
+        {
+            player = FindObjectOfType<PlayerMovement>();
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                onSpotterTrigger?.Invoke(player.transform.position);
+            }
+        }
+
+    }
 }

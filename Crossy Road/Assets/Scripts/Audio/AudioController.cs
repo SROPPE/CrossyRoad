@@ -1,26 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-public class AudioController : MonoBehaviour
+namespace CrossyRoad.Audio
 {
-    [SerializeField] private AudioMixerGroup mixer;
-    [SerializeField] private Toggle toggleMusic;
-    private void Start()
+    public class AudioController : MonoBehaviour
     {
-        toggleMusic.isOn = PlayerPrefs.GetInt("MasterVolume") == 1;
-    }
-    public void ToggleMusic(bool enabled)
-    {
-        if (enabled)
-        { 
-            mixer.audioMixer.SetFloat("MasterVolume", 0f);
-        }
-        else
+        [SerializeField] private AudioMixerGroup mixer;
+        [SerializeField] private Toggle toggleMusic;        //Volume toggle(on/off)
+        private void Start()
         {
-            mixer.audioMixer.SetFloat("MasterVolume", -80f);
+            toggleMusic.isOn = PlayerPrefs.GetInt("MasterVolume") == 1;
         }
-        PlayerPrefs.SetInt("MasterVolume", enabled ? 1 : 0);
+        public void ToggleMusic(bool enabled)
+        {
+            if (enabled)
+            {
+                mixer.audioMixer.SetFloat("MasterVolume", 0f);
+            }
+            else
+            {
+                mixer.audioMixer.SetFloat("MasterVolume", -80f);
+            }
+            PlayerPrefs.SetInt("MasterVolume", enabled ? 1 : 0);
+        }
     }
 }

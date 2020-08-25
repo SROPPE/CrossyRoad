@@ -1,19 +1,21 @@
-﻿using UnityEngine;
-
-public class Coin : MonoBehaviour
+﻿using CrossyRoad.Core;
+using UnityEngine;
+namespace CrossyRoad.Pickups
 {
-    [SerializeField] private int coinCost = 1;
-    private PlayerWallet currentWallet;
-    private void Awake()
+    public class Coin : MonoBehaviour
     {
-        currentWallet = FindObjectOfType<PlayerWallet>();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        [SerializeField] private int coinCost = 1;
+        private void OnTriggerEnter(Collider other)
         {
-            currentWallet.AddCoin(coinCost);
-            gameObject.SetActive(false);
+            if (other.CompareTag("Player"))
+            {
+                PlayerWallet currentWallet = other.GetComponent<PlayerWallet>();
+                if (currentWallet)
+                {
+                    currentWallet.AddCoin(coinCost);
+                    gameObject.SetActive(false);
+                }
+            }
         }
     }
 }

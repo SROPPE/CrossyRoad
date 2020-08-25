@@ -1,6 +1,8 @@
-
-  public interface ISaveable
+namespace CrossyRoad.Saving
+{
+    public interface ISaveable
     {
         object CaptureState();
         void RestoreState(object state);
     }
+}

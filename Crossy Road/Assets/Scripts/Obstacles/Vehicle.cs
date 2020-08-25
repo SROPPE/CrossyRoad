@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using DG.Tweening;
-public class Vehicle : MonoBehaviour,IMoveable
+namespace CrossyRoad.Obstacles
 {
-    private void CompleteMovement()
+    public class Vehicle : MonoBehaviour, IMoveableObstacle
     {
-        gameObject.SetActive(false);
-    }
-
-    public void StartMoveAction(Vector3 endPoint, float moveDuration)
-    {
-        transform.LookAt(endPoint);
-        transform.DOMove(endPoint, moveDuration).OnComplete(CompleteMovement);
+        public void StartMoveAction(Vector3 endPoint, float moveDuration)
+        {
+            transform.LookAt(endPoint);
+            transform.DOMove(endPoint, moveDuration).OnComplete(CompleteMovement);
+        }
+        private void CompleteMovement()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

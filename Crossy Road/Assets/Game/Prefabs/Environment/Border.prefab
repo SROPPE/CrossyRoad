@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 883921769375662783}
   - component: {fileID: 883921769375662780}
   - component: {fileID: 883921769375662781}
+  - component: {fileID: 101266981775894736}
   m_Layer: 0
   m_Name: Border
   m_TagString: Obstacle
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 883921769375662778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 44.698, z: 50.686}
+  m_LocalScale: {x: 1, y: 44.698, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -88,8 +89,21 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883921769375662778}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &101266981775894736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883921769375662778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7176aa5c977624488815dcbd22958a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathSound: {fileID: 0}

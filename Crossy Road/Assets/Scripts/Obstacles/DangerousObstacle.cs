@@ -1,17 +1,20 @@
-﻿using UnityEngine;
-
-public class DangerousObstacle : MonoBehaviour
+﻿using CrossyRoad.Core;
+using UnityEngine;
+namespace CrossyRoad.Obstacles
 {
-    [SerializeField] private AudioSource deathSound;
-    private void OnTriggerEnter(Collider other)
+    public class DangerousObstacle : MonoBehaviour
     {
-        if(other.CompareTag("Player"))
+        [SerializeField] private AudioSource deathSound;
+        private void OnTriggerEnter(Collider other)
         {
-            var player = other.GetComponent<PlayerController>();
-            if (!player.IsDead)
+            if (other.CompareTag("Player"))
             {
-                deathSound.Play();
-                player.Dead();
+                var player = other.GetComponent<PlayerController>();
+                if (!player.IsDead)
+                {
+                    deathSound.Play();
+                    player.Dead();
+                }
             }
         }
     }

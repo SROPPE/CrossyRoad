@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using CrossyRoad.UI;
+using UnityEngine;
+namespace CrossyRoad.Utilities
+{
     public class PersistentObjectSpawner : MonoBehaviour
     {
         [SerializeField] GameObject persistentObjectPrefab;
@@ -16,3 +19,4 @@
             isSpawned = true;
         }
     }
+}

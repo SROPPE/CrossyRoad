@@ -1,6 +1,4 @@
-﻿
-
-public interface IPolledObject 
+﻿public interface IPolledObject 
 {
     void OnSpawn();
 }

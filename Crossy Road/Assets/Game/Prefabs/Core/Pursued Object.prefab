@@ -137,9 +137,9 @@ MonoBehaviour:
   camera: {fileID: 0}
   eaglePrefab: {fileID: 7503200109281031323, guid: 000fe07efc22abd4ca180328444d664e,
     type: 3}
-  eagleFlyDuration: 4
   eagleSpawnPoint: {fileID: 5455836287833981376}
   eagleEndPoint: {fileID: 1147552977260249175}
+  eagleFlyDuration: 4
 --- !u!65 &3519623953904606497
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acf7fa6f51866b499b453617ed4672e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.5
-  offset: 0.1
+  movementSpeed: 0.4
+  chaseTime: 0.2
   cameraSpotter: {fileID: 1350160865}
 --- !u!114 &1787873074
 MonoBehaviour:

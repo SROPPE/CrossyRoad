@@ -1,6 +1,9 @@
-﻿public enum ScreenType
+﻿namespace CrossyRoad.UI
 {
-    Start,
-    InGame,
-    EndGame
+    public enum ScreenType
+    {
+        Start,
+        InGame,
+        EndGame
+    }
 }

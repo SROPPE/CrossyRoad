@@ -1,56 +1,59 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using CrossyRoad.Core;
+using CrossyRoad.Saving;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreboardController : MonoBehaviour, ISaveable
+namespace CrossyRoad.UI
 {
-    [SerializeField] private Text scoreShower;
-    [SerializeField] private Text scoreRecoredShower;
-    private PlayerMovement player;
-    private int currentScore = 0;
-    private int recordScore = 0;
-    private void Awake()
+    public class ScoreboardController : MonoBehaviour, ISaveable
     {
-        player = FindObjectOfType<PlayerMovement>();
-    }
-    private void Start()
-    {
-        AddScore();  
-    }
-    private void OnEnable()
-    {
-        player.onMoveForward.AddListener(AddScore);
-    }
-    private void OnDisable()
-    {
-        player.onMoveForward.RemoveListener(AddScore);
-    }
-    private void AddScore()
-    {
-        currentScore++;
-        if(currentScore >= recordScore)
+        [SerializeField] private Text scoreShower;
+        [SerializeField] private Text scoreRecordShower;
+        private PlayerMovement player;
+        private int currentScore = 0;
+        private int recordScore = 0;
+        private void Awake()
         {
-            recordScore = currentScore;
+            player = FindObjectOfType<PlayerMovement>();
         }
-        UpdateUI();
-    }
+        private void Start()
+        {
+            AddScore();
+        }
+        private void OnEnable()
+        {
+            player.onGetNewZPosition.AddListener(AddScore);
+        }
+        private void OnDisable()
+        {
+            player.onGetNewZPosition.RemoveListener(AddScore);
+        }
+        private void AddScore()
+        {
+            Debug.Log("We");
+            currentScore++;
+            if (currentScore >= recordScore)
+            {
+                recordScore = currentScore;
+            }
+            UpdateUI();
+        }
+        private void UpdateUI()
+        {
+            scoreRecordShower.text = string.Format("Рекорд: {0}", recordScore);
+            scoreShower.text = currentScore.ToString();
+        }
 
-    public object CaptureState()
-    {
-        return recordScore;
-    }
+        public object CaptureState()
+        {
+            return recordScore;
+        }
 
-    public void RestoreState(object state)
-    {
-        currentScore = 0;
-        recordScore = (int)state;
-        UpdateUI();
-    }
-
-    private void UpdateUI()
-    {
-        scoreRecoredShower.text = string.Format("Рекорд: {0}", recordScore);
-        scoreShower.text = currentScore.ToString();
+        public void RestoreState(object state)
+        {
+            currentScore = 0;
+            recordScore = (int)state;
+            UpdateUI();
+        }
     }
 }

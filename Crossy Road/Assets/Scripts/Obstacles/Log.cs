@@ -1,30 +1,31 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class Log : MonoBehaviour, IMoveable
+namespace CrossyRoad.Obstacles
 {
-
-    private void OnTriggerEnter(Collider other)
+    public class Log : MonoBehaviour, IMoveableObstacle
     {
-        if (other.CompareTag("Player"))
+        private void CompleteMovement()
         {
-            other.gameObject.transform.parent = transform;
+            gameObject.SetActive(false);
+        }
+        public void StartMoveAction(Vector3 endPoint, float moveDuration)
+        {
+            transform.DOMove(endPoint, moveDuration).OnComplete(CompleteMovement);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                other.gameObject.transform.parent = transform;
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                other.gameObject.transform.parent = null;
+            }
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            other.gameObject.transform.parent = null;
-        }
-    }
-    private void CompleteMovement()
-    {
-        gameObject.SetActive(false);   
-    }
-    public void StartMoveAction(Vector3 endPoint, float moveDuration)
-    {
-        transform.DOMove(endPoint, moveDuration).OnComplete(CompleteMovement);
-    }
-
 }
